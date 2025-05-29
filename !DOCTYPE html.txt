@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zona de Estrellas - Votación</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('NUEVO%20FONDO_ZDE_2024.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      text-align: center;
+    }
+
+    #logo {
+      margin: 20px auto;
+      max-width: 300px;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      margin: 50px auto;
+      max-width: 500px;
+      border-radius: 15px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .button {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .no {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .results {
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <img id="logo" src="LOGO_ZDE.png" alt="Zona de Estrellas Logo">
+
+  <div class="container">
+    <h1>¿Estás de acuerdo?</h1>
+    <button class="button yes" onclick="vote('Si')">Sí</button>
+    <button class="button no" onclick="vote('No')">No</button>
+
+    <div class="results">
+      <h2>Resultados:</h2>
+      <p>Sí: <span id="yesCount">0</span> votos</p>
+      <p>No: <span id="noCount">0</span> votos</p>
+      <h3>Votantes:</h3>
+      <ul id="votersList"></ul>
+    </div>
+  </div>
+
+  <script>
+    let yesCount = 0;
+    let noCount = 0;
+    const voters = [];
+
+    function vote(choice) {
+      const name = prompt("Ingresa tu nombre para votar:");
+      if (!name || voters.includes(name)) {
+        alert("Nombre inválido o ya ha votado.");
+        return;
+      }
+      voters.push(name);
+
+      if (choice === 'Si') {
+        yesCount++;
+        document.getElementById("yesCount").innerText = yesCount;
+      } else {
+        noCount++;
+        document.getElementById("noCount").innerText = noCount;
+      }
+
+      const li = document.createElement("li");
+      li.textContent = name + ": votó " + choice;
+      document.getElementById("votersList").appendChild(li);
+    }
+  </script>
+</body>
+</html>
